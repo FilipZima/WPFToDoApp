@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPFToDoApp.Linux;
 
 namespace WPFToDoApp
 {
@@ -19,6 +20,20 @@ namespace WPFToDoApp
         public MainWindow()
         {
             InitializeComponent();
+
+            if (Content is not Grid grid)
+            {
+                Console.WriteLine("Content is not a Grid");
+                return;
+            }
+
+            grid.MouseLeftButtonDown += (s, e) => { 
+                if (e.ChangedButton == MouseButton.Left) DragMove();
+            };
+
+            TodoListBox.MouseDoubleClick += (s, e) => {
+
+            };
         }
     }
 }

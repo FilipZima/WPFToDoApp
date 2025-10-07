@@ -5,6 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFToDoApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="512" Width="512">
-    <Grid/>
+        WindowStartupLocation="CenterScreen"
+        Title="To Do App" Height="450" Width="284">
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="3" />
+    </WindowChrome.WindowChrome>
+
+    <Grid Background="AliceBlue">
+        <ListBox x:Name="TodoListBox" Width="250" Height="400" Background="LightBlue">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Title}"/>
+                        <CheckBox IsChecked="{Binding IsDone}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
 </Window>
