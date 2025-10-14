@@ -17,5 +17,15 @@ namespace WPFToDoApp.Database
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlite("Data Source = ToDoAppDb.db");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ToDoEntity>().HasData(
+                new ToDoEntity { ID = 1, IsDone = true, Title = "Vyluxovat" },
+                new ToDoEntity { ID = 2, IsDone = false, Title = "Nakoupit" }
+                );
+        }
     }
 }

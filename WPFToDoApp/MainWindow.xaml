@@ -8,20 +8,18 @@
         WindowStartupLocation="CenterScreen"
         Title="To Do App" Height="450" Width="284">
 
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="0" ResizeBorderThickness="3" />
-    </WindowChrome.WindowChrome>
-
     <Grid Background="AliceBlue">
-        <ListBox x:Name="TodoListBox" Width="250" Height="400" Background="LightBlue">
+        <ListBox x:Name="TodoListBox" Width="250" Background="LightBlue" Margin="17,17,17,118">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Title}"/>
-                        <CheckBox IsChecked="{Binding IsDone}"/>
+                        <CheckBox IsChecked="{Binding IsDone}" DataContext="{Binding ID}" Checked="CheckboxChecked"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <Button x:Name="AddButton" Content="+" HorizontalAlignment="Right" Width="32px" Height="32px" Margin="0,0,20,20" VerticalAlignment="Bottom" Background="LightBlue" Foreground="White" FontSize="24"/>
+        <Button x:Name="RemoveButton" Content="-" HorizontalAlignment="Right" Width="32px" Height="32px" Margin="0,0,20,60" VerticalAlignment="Bottom" Background="LightBlue" Foreground="White" FontSize="24"/>
     </Grid>
 </Window>

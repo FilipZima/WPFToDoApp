@@ -4,11 +4,9 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using WPFToDoApp.Database;
 using WPFToDoApp.Linux;
+using WPFToDoApp.Models;
 
 namespace WPFToDoApp
 {
@@ -19,21 +17,50 @@ namespace WPFToDoApp
     {
         public MainWindow()
         {
+            ToDoContext ctx = new ToDoContext();
+            ContextMgr ctxMgr = new ContextMgr(ctx);
+
             InitializeComponent();
 
-            if (Content is not Grid grid)
+            TodoListBox.ItemsSource = ctxMgr.GetAll();
+
+            if (Content is not Grid grid) return;
+
+            AddButton.Click += (s, e) => {
+                NewTaskWindow ntWindow = new NewTaskWindow(ctxMgr);
+                ntWindow.Closing += (s, e) =>
+                {
+                    RefreshListBox(ctxMgr);
+                };
+                ntWindow.ShowDialog();
+            };
+
+            RemoveButton.Click += (s, e) =>
             {
-                Console.WriteLine("Content is not a Grid");
-                return;
+                if (TodoListBox.SelectedItem is ToDoEntity toDoEntity)
+                {
+                    MessageBoxResult result = MessageBox.Show($"Do you really want to remove '{toDoEntity.Title}'", "Entity deletion", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        ctxMgr.Remove(toDoEntity);
+                        RefreshListBox(ctxMgr);
+                    }
+                }
+            };
+        }
+
+        private void RefreshListBox(ContextMgr ctxMgr)
+        {
+            TodoListBox.ItemsSource = null;
+            TodoListBox.ItemsSource = ctxMgr.GetAll();
+        }
+
+        private void CheckboxChecked(object sender, EventArgs e)
+        {
+            if (sender is CheckBox cb)
+            {
+                ctxMgr.GetByID((int)cb.DataContext);
             }
-
-            grid.MouseLeftButtonDown += (s, e) => { 
-                if (e.ChangedButton == MouseButton.Left) DragMove();
-            };
-
-            TodoListBox.MouseDoubleClick += (s, e) => {
-
-            };
         }
     }
 }

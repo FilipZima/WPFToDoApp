@@ -33,7 +33,7 @@ namespace WPFToDoApp.Linux
 
             ToDoEntity todo = new ToDoEntity
             {
-                title = title,
+                Title = title,
                 IsDone = isDone
             };
 

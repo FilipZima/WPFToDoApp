@@ -4,8 +4,8 @@ namespace WPFToDoApp.Models
 {
     public class ToDoEntity : INotifyPropertyChanged
     {
-        public int id;
-        public string title;
+        public int ID { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -21,6 +21,6 @@ namespace WPFToDoApp.Models
             }
         }
 
-        public override string ToString() => title;
+        public override string ToString() => Title;
     }
 }
