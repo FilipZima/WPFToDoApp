@@ -29,8 +29,17 @@ namespace WPFToDoApp.Database
             _context.SaveChanges();
         }
 
+        public ToDoEntity? GetByTitle(string title)
+        {
+            foreach (ToDoEntity e in _context.ToDoSet)
+            {
+                if (e.Title == title) return e;
+            }
+            return null;
+        }
+
         public ToDoEntity? GetByID(int id) => _context.ToDoSet.Find(id);
 
-        public ToDoEntity[] GetAll() => _context.ToDoSet.ToArray();
+        public List<ToDoEntity> GetAll() => _context.ToDoSet.ToList();
     }
 }

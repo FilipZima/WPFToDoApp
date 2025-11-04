@@ -21,5 +21,6 @@
         </ListBox>
         <Button x:Name="AddButton" Content="+" HorizontalAlignment="Right" Width="32px" Height="32px" Margin="0,0,20,20" VerticalAlignment="Bottom" Background="LightBlue" Foreground="White" FontSize="24"/>
         <Button x:Name="RemoveButton" Content="-" HorizontalAlignment="Right" Width="32px" Height="32px" Margin="0,0,20,60" VerticalAlignment="Bottom" Background="LightBlue" Foreground="White" FontSize="24"/>
+        <Button x:Name="EditButton" Content="E" HorizontalAlignment="Right" Width="32px" Height="32px" Margin="0,0,69,20" VerticalAlignment="Bottom" Background="LightBlue" Foreground="White" FontSize="24"/>
     </Grid>
 </Window>
